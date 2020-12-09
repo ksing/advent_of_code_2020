@@ -32,6 +32,9 @@ def puzzle2_solution(input_data, invalid_number):
         if start_number == invalid_number:
             continue
         for end_index, accumulated_sum in enumerate(it.accumulate(input_data[start_index:])):
+            if accumulated_sum > invalid_number:
+                # print('Sum exceeded the number already')
+                continue
             if accumulated_sum == invalid_number:
                 numbers_list = input_data[start_index:(start_index + end_index + 1)]
                 return max(numbers_list) + min(numbers_list)
