@@ -15,4 +15,5 @@ def _get_puzzle_solution(input_data, num_combinations):
         if sum(numbers) == 2020:
             return reduce(op.mul, numbers)
 
+
 main()
