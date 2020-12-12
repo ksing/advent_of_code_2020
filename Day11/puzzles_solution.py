@@ -2,12 +2,16 @@ import sys
 
 import numpy as np
 
+EMPTY_SEAT = 'L'
+OCCUPIED_SEAT = '#'
+FLOOR = '.'
+
 
 def main(file_name):
     with open(file_name, 'r') as f:
-        input_data = np.array([list(line.strip()) for line in f])
-    print(f'Puzzle 1 solution: {puzzle1_solution(input_data.copy())}')
-    print(f'Puzzle 2 solution: {puzzle2_solution(input_data.copy())}')
+        input_data = [list(line.strip()) for line in f]
+    print(f'Puzzle 1 solution: {puzzle1_solution(np.array(input_data))}')
+    print(f'Puzzle 2 solution: {puzzle2_solution(np.array(input_data))}')
 
 
 def puzzle1_solution(seat_arrangement):
@@ -25,8 +29,8 @@ def puzzle1_solution(seat_arrangement):
             )
         # print(seat_arrangement)
         if np.array_equal(seat_arrangement, temp):
+            print(f'Equilibrium reached after {k} passes. Final seat plan:')
             print(seat_arrangement)
-            print(f'Equilibrium reached after {k} passes')
             break
     return _get_num_occupied_adjacent_seats(seat_arrangement)
 
@@ -47,8 +51,8 @@ def puzzle2_solution(seat_arrangement):
             )
         # print(seat_arrangement)
         if np.array_equal(seat_arrangement, temp):
+            print(f'Equilibrium reached after {k} passes. Final seat plan:')
             print(seat_arrangement)
-            print(f'Equilibrium reached after {k} passes')
             break
     return _get_num_occupied_adjacent_seats(seat_arrangement)
 
@@ -61,18 +65,18 @@ def _get_seat_changes(seat, adjacent_seats):
     #  the seat becomes empty.
     # In puzzle 2: If that number is 5 or more, seat becomes empty.
     # Otherwise, the seat's state does not change.
-    if seat == '.':
-        return '.'
-    elif seat == 'L':
+    if seat == FLOOR:
+        return FLOOR
+    elif seat == EMPTY_SEAT:
         if _get_num_occupied_adjacent_seats(adjacent_seats) == 0:
-            return '#'
+            return OCCUPIED_SEAT
         else:
             return seat
-    elif seat == '#':
+    elif seat == OCCUPIED_SEAT:
         # It works in both puzzles, because in puzzle 1's adjacent seat matrix, seat at (1,1) is also counted by
         #  _get_num_occupied_adjacent_seats, which then needs to be discounted.
         if _get_num_occupied_adjacent_seats(adjacent_seats) > 4:
-            return 'L'
+            return EMPTY_SEAT
         else:
             return seat
     else:
@@ -80,8 +84,8 @@ def _get_seat_changes(seat, adjacent_seats):
 
 
 def _get_visible_seat_matrix(row, column, all_seats):
-    visible_seats = np.full((3, 3), '.')
-    if all_seats[row, column] == '.':
+    visible_seats = np.full((3, 3), FLOOR)
+    if all_seats[row, column] == FLOOR:
         return visible_seats
     for i, j in np.ndindex(visible_seats.shape):
         if i == j == 1:
@@ -96,7 +100,7 @@ def _get_visible_seat_matrix(row, column, all_seats):
         ):
             seat_status = all_seats[row + cntr * row_diff, column + cntr * column_diff]
             # print(row + cntr * row_diff, column + cntr * column_diff, seat_status)
-            if seat_status != '.':
+            if seat_status != FLOOR:
                 visible_seats[i, j] = seat_status
                 break
             cntr += 1
@@ -105,7 +109,7 @@ def _get_visible_seat_matrix(row, column, all_seats):
 
 
 def _get_num_occupied_adjacent_seats(seat_matrix):
-    return (seat_matrix == '#').sum()
+    return (seat_matrix == OCCUPIED_SEAT).sum()
 
 
 if __name__ == "__main__":
