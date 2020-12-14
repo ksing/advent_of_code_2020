@@ -71,7 +71,7 @@ def _get_bitmasked_memory_address(memory, bitmask):
             new_memory.append(mask)
         else:
             new_memory.append(value)
-    for bit_replacements in set(it.combinations_with_replacement(('0', '1') * num_floating, num_floating)):
+    for bit_replacements in it.product('01', repeat=num_floating):
         memory = ''.join(new_memory)
         for bit_replacement in bit_replacements:
             memory = memory.replace('X', bit_replacement, 1)
