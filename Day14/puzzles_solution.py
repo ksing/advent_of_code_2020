@@ -44,7 +44,7 @@ def _get_bitmasked_value(memory, bitmask):
     return int(''.join(new_memory), 2)
 
 
-def puzzle2_solution(input_data):
+def puzzle2_solution(file_name):
     # https://adventofcode.com/2020/day/14#part2
     memory_store = {}
     with open(file_name, 'r') as f:

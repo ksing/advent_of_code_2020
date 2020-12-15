@@ -37,9 +37,7 @@ def puzzle1_solution(seat_arrangement):
 
 def puzzle2_solution(seat_arrangement):
     # https://adventofcode.com/2020/day/11#part2
-
     print(seat_arrangement)
-
     for k in range(1000):
         temp = seat_arrangement.copy()
         print(f'{k+1}e pass')
@@ -65,20 +63,12 @@ def _get_seat_changes(seat, adjacent_seats):
     #  the seat becomes empty.
     # In puzzle 2: If that number is 5 or more, seat becomes empty.
     # Otherwise, the seat's state does not change.
-    if seat == FLOOR:
-        return FLOOR
-    elif seat == EMPTY_SEAT:
-        if _get_num_occupied_adjacent_seats(adjacent_seats) == 0:
-            return OCCUPIED_SEAT
-        else:
-            return seat
-    elif seat == OCCUPIED_SEAT:
+    if seat == EMPTY_SEAT and _get_num_occupied_adjacent_seats(adjacent_seats) == 0:
+        return OCCUPIED_SEAT
+    elif seat == OCCUPIED_SEAT and _get_num_occupied_adjacent_seats(adjacent_seats) > 4:
         # It works in both puzzles, because in puzzle 1's adjacent seat matrix, seat at (1,1) is also counted by
         #  _get_num_occupied_adjacent_seats, which then needs to be discounted.
-        if _get_num_occupied_adjacent_seats(adjacent_seats) > 4:
-            return EMPTY_SEAT
-        else:
-            return seat
+        return EMPTY_SEAT
     else:
         return seat
 
