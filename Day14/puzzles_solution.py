@@ -2,14 +2,19 @@ import itertools as it
 import re
 import sys
 from pathlib import Path
+from time import perf_counter
 
 MASK_REG = re.compile(r'mask = ([X01]{36})')
 MEMORY_REG = re.compile(r'mem\[(\d+)\] = (\d+)')
 
 
 def main(file_name):
+    t0 = perf_counter()
     print(f'Puzzle 1 solution: {puzzle1_solution(file_name)}')
+    print(f'Time taken by puzzle1 = {perf_counter() - t0}')
+    t0 = perf_counter()
     print(f'Puzzle 2 solution: {puzzle2_solution(file_name)}')
+    print(f'Time taken by puzzle2 = {perf_counter() - t0}')
 
 
 def puzzle1_solution(file_name):
@@ -62,7 +67,6 @@ def puzzle2_solution(input_data):
 def _get_bitmasked_memory_address(memory, bitmask):
     new_memory = []
     num_floating = 0
-    list_memory_locations = []
     for value, mask in zip(f'{memory:0>36b}', bitmask):
         if mask == 'X':
             new_memory.append(mask)
@@ -75,8 +79,7 @@ def _get_bitmasked_memory_address(memory, bitmask):
         memory = ''.join(new_memory)
         for bit_replacement in bit_replacements:
             memory = memory.replace('X', bit_replacement, 1)
-        list_memory_locations.append(int(memory, 2))
-    return list_memory_locations
+        yield int(memory, 2)
 
 
 if __name__ == "__main__":
