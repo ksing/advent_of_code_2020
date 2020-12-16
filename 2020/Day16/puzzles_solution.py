@@ -49,29 +49,14 @@ def puzzle2_solution(dict_definitions, my_ticket, other_tickets):
     ticket_length = len(my_ticket)
     # If values at an index in all tickets satisfy the number range of a rule, add the index to the value
     #  in a dictionary with the name of the rule being the key.
-    definition_indices = {
-        definition: {
+    definition_indices = {}
+    for definition, number_range in dict_definitions.items():
+        definition_indices[definition] = {
             index
             for index in range(ticket_length)
             if all(ticket[index] in number_range for ticket in valid_tickets)
         }
-        for definition, number_range in dict_definitions.items()
-    }
-    # Remove step-by-step indices from rule definitions, starting from that with least number of indices
-    #  that satisfy its number range.
-    seen = set()
-    for definition, set_index in sorted(
-        definition_indices.items(), key=lambda x: len(x[1])
-    ):
-        definition_indices[definition] = set_index - seen  # Remove indices already present in more specific rules.
-        seen |= set_index
-
-    # print(sorted(definition_indices.items(), key=lambda x: str(x[1])))
-    # [('class', {0}), ('route', {1}), ('departure date', {2}), ('duration', {3}), ('arrival platform', {4}),
-    #  ('arrival track', {5}), ('train', {6}), ('zone', {7}), ('row', {8}), ('departure location', {9}),
-    #  ('departure station', {10}), ('arrival location', {11}), ('arrival station', {12}), ('price', {13}),
-    #  ('wagon', {14}), ('seat', {15}), ('type', {16}), ('departure track', {17}),
-    #  ('departure platform', {18}), ('departure time', {19})]
+    definition_indices = _get_definition_index_combinations(definition_indices)
     return reduce(op.mul, (
         my_ticket[set_index.pop()]
         for key, set_index in definition_indices.items()
@@ -87,6 +72,25 @@ def _get_valid_definitions(definitions):
             start, end = tuple(int(num) for num in valid_range.split('-'))
             valid_definitions[key] |= set(range(start, end + 1))
     return valid_definitions
+
+
+def _get_definition_index_combinations(definition_indices):
+    # Remove step-by-step indices from rule definitions, starting from that with least number of indices
+    #  that satisfy its number range.
+    seen = set()
+    for definition, set_index in sorted(
+        definition_indices.items(), key=lambda x: len(x[1])
+    ):
+        definition_indices[definition] = set_index - seen  # Remove indices already present in more specific rules.
+        seen |= set_index
+
+    # print(sorted(definition_indices.items(), key=lambda x: str(x[1])))
+    # [('class', {0}), ('route', {1}), ('departure date', {2}), ('duration', {3}), ('arrival platform', {4}),
+    #  ('arrival track', {5}), ('train', {6}), ('zone', {7}), ('row', {8}), ('departure location', {9}),
+    #  ('departure station', {10}), ('arrival location', {11}), ('arrival station', {12}), ('price', {13}),
+    #  ('wagon', {14}), ('seat', {15}), ('type', {16}), ('departure track', {17}),
+    #  ('departure platform', {18}), ('departure time', {19})]
+    return definition_indices
 
 
 if __name__ == "__main__":
