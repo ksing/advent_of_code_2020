@@ -1,6 +1,5 @@
 import re
 import sys
-from collections import deque
 from pathlib import Path
 from time import perf_counter
 
@@ -38,8 +37,7 @@ def _evaluate_expression_left_to_right(expr):
 
 
 def puzzle1_solution(file_name):
-    # https://adventofcode.com/2020/day/17
-    # Conway's game of cubes
+    # https://adventofcode.com/2020/day/18
     return sum(
         get_expression_result(line, _evaluate_expression_left_to_right)
         for line in read_file(file_name)
