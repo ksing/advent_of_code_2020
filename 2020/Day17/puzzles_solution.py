@@ -31,7 +31,8 @@ def puzzle1_solution(conway_cubes):
         for i, j, k in np.ndindex(temp.shape):
             # print(i, j, k)
             conway_cubes[i, j, k] = _change_cube_state(
-                temp[i, j, k], temp[max(0, i-1):i+2, max(0, j-1):j+2, max(0, k-1):k+2]
+                temp[i, j, k],
+                temp[max(0, i-1):i+2, max(0, j-1):j+2, max(0, k-1):k+2]
             )
         # print(_get_num_activated_cubes(conway_cubes))
         # print('New energy config', conway_cubes)
@@ -49,7 +50,8 @@ def puzzle2_solution(conway_cubes):
         for i, j, k, l in np.ndindex(temp.shape):
             # print(i, j, k, l)
             conway_cubes[i, j, k, l] = _change_cube_state(
-                temp[i, j, k, l], temp[max(0, i-1):i+2, max(0, j-1):j+2, max(0, k-1):k+2, max(0, l-1):l+2]
+                temp[i, j, k, l],
+                temp[max(0, i-1):i+2, max(0, j-1):j+2, max(0, k-1):k+2, max(0, l-1):l+2]
             )
         # print(_get_num_activated_cubes(conway_cubes))
         # print('New energy config', conway_cubes)
@@ -81,7 +83,7 @@ def _change_cube_state(this_cube, adjacent_cubes):
 
 
 def _get_num_activated_cubes(energy_matrix):
-    return (energy_matrix == ACTIVE).sum()
+    return np.sum(energy_matrix == ACTIVE)
 
 
 if __name__ == "__main__":
