@@ -6,6 +6,7 @@ from collections import namedtuple
 from dataclasses import dataclass
 from functools import reduce
 from pathlib import Path
+from time import perf_counter
 
 import numpy as np
 
@@ -76,11 +77,17 @@ def main(file_name):
     with open(file_name, 'r') as f:
         input_data = f.read().strip().split('\n\n')
 
+    t0 = perf_counter()
     image_tiles = match_image_tiles(
         dict(Tile.parse_input(tile_input) for tile_input in input_data)
     )
+    print(f'Time taken in arranging image tiles = {perf_counter() - t0}')
+    t0 = perf_counter()
     print(f'Puzzle 1 solution: {puzzle1_solution(image_tiles)}')
+    print(f'Time taken by puzzle1 = {perf_counter() - t0}')
+    t0 = perf_counter()
     print(f'Puzzle 2 solution: {puzzle2_solution(image_tiles)}')
+    print(f'Time taken by puzzle2 = {perf_counter() - t0}')
 
 
 def match_image_tiles(image_tiles):
@@ -116,6 +123,10 @@ def puzzle2_solution(image_tiles):
     # print(image.shape)
     monster_image = _read_monster_image()
     # print(monster_image)
+    return image.sum() - _get_turbulence_under_monster(image, monster_image)
+
+
+def _get_turbulence_under_monster(image, monster_image):
     num_turbulence_under_monster = 0
     list_operations = (np.fliplr, np.flipud, lambda x: x)
     for i in range(len(image)):
@@ -135,7 +146,7 @@ def puzzle2_solution(image_tiles):
                             break
                 if flag:
                     break
-    return image.sum() - num_turbulence_under_monster
+    return num_turbulence_under_monster
 
 
 def _get_joined_image(image_tiles):
