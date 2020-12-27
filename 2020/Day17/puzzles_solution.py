@@ -44,7 +44,7 @@ def puzzle2_solution(conway_cubes):
     print(conway_cubes)
     conway_cubes = conway_cubes.reshape(conway_cubes.shape + (1, 1,))
     for m in range(6):
-        conway_cubes = _expand_energy_source(conway_cubes, num_dimensions=4)
+        conway_cubes = _expand_energy_source(conway_cubes)
         temp = conway_cubes.copy()
         print(f'{m+1}e pass.')
         for i, j, k, l in np.ndindex(temp.shape):
@@ -58,12 +58,12 @@ def puzzle2_solution(conway_cubes):
     return _get_num_activated_cubes(conway_cubes)
 
 
-def _expand_energy_source(data, num_dimensions=3):
+def _expand_energy_source(data):
     new_shape = tuple(x + 2 for x in data.shape)
     out_matrix = np.full(new_shape, INACTIVE)
-    if num_dimensions == 3:
+    if data.ndim == 3:
         out_matrix[1:-1, 1:-1, 1:-1] = data
-    elif num_dimensions == 4:
+    elif data.ndim == 4:
         out_matrix[1:-1, 1:-1, 1:-1, 1:-1] = data
     return out_matrix
 
