@@ -2,7 +2,7 @@ import sys
 from collections import OrderedDict
 from dataclasses import dataclass, field
 from time import perf_counter
-from typing import Optional
+from typing import List, Optional
 
 
 @dataclass
@@ -70,6 +70,12 @@ class CupsCircle:
     def remove(self):
         _ = self.pop()
 
+    def insert(self, destination_cup, added_cups: List['Cup']):
+        added_cups[-1].next = destination_cup.next
+        destination_cup.next = added_cups[0]
+        if destination_cup is self.tail:
+            self.tail = added_cups[-1]
+
     def get_cup_label(self, value: int):
         cup = self.head
         while cup is not None:
@@ -83,8 +89,8 @@ class CupsCircle:
         output = []
         cup = self.head
         while cup is not None:
-            output.append(cup.value)
-            if cup is self.tail:
+            output.append(str(cup.value))
+            if cup.next is self.head:
                 break
             cup = cup.next
         return ''.join(output)
@@ -110,13 +116,17 @@ def _generate_cups_circle(cups_dict):
 
 def puzzle1_solution(cups_dict):
     # https://adventofcode.com/2020/day/23
-    print(cups_dict)
+    # print(cups_dict)
     cups_circle = _generate_cups_circle(cups_dict)
-    print(cups_circle)
     cups_circle = perform_moves(cups_circle)
     print(cups_circle)
-    print(cups_circle.get_cup_label(1))
-    # return ''.join([str(i) for i in _rearrange_array(cups_dict, 1)])
+    cup_1 = cups_circle.get_cup_label(1)
+    cup = cup_1.next
+    output = []
+    while cup != cup_1:
+        output.append(str(cup.value))
+        cup = cup.next
+    return ''.join(output)
 
 
 # def puzzle2_solution(cups_dict):
@@ -133,27 +143,25 @@ def puzzle1_solution(cups_dict):
 
 def perform_moves(cups_circle, num_moves=100):
     for i in range(num_moves):
-        print(str(cups_circle))
+        # print(str(cups_circle), cups_circle.current_cup)
         picked_cups = [cups_circle.current_cup.next]
         for j in range(2):
             cup = picked_cups[j].next
             picked_cups.append(cup)
-        print(picked_cups)
+        # print('picked_cups:', picked_cups)
         cups_circle.current_cup.next = picked_cups[2].next
         destination_cup = cups_circle.current_cup.smaller_cup
         cups_circle.current_cup = cups_circle.current_cup.next
         while 1:
+            # print('destination_cup:', destination_cup)
             if destination_cup is None:
                 destination_cup = cups_circle.largest_cup
             if destination_cup not in picked_cups:
                 break
             destination_cup = destination_cup.smaller_cup
-        picked_cups[2].next = destination_cup.next
-        destination_cup.next = picked_cups[0]
+        cups_circle.insert(destination_cup, picked_cups)
         if i % 10_000 == 0:
             print("That's 10k moves")
-        # print(current_cup_label)
-        # print(cups_dict)
     return cups_circle
 
 
