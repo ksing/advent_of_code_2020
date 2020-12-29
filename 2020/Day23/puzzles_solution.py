@@ -60,12 +60,12 @@ class CupsCircle:
         if self.head is None:
             raise IndexError("Empty CircleQueue")
         else:
-            deleted = self.head.value
+            deleted = self.head
             if self.largest_cup is self.head:
                 self.largest_cup = self.head.smaller_cup
-            self.tail.next = self.head.next
-            del self.head
-            return deleted
+            self.head = self.head.next
+            self.tail.next = self.head
+            return deleted.value
 
     def remove(self):
         _ = self.pop()
