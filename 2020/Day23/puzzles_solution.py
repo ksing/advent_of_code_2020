@@ -101,9 +101,9 @@ def main(cup_string):
     t0 = perf_counter()
     print(f'Puzzle 1 solution: {puzzle1_solution(cups_dict)}')
     print(f'Time taken by puzzle1 = {perf_counter() - t0}')
-    # t0 = perf_counter()
-    # print(f'Puzzle 2 solution: {puzzle2_solution(cups_dict)}')
-    # print(f'Time taken by puzzle1 = {perf_counter() - t0}')
+    t0 = perf_counter()
+    print(f'Puzzle 2 solution: {puzzle2_solution(cups_dict)}')
+    print(f'Time taken by puzzle1 = {perf_counter() - t0}')
 
 
 def _generate_cups_circle(cups_dict):
@@ -118,8 +118,8 @@ def puzzle1_solution(cups_dict):
     # https://adventofcode.com/2020/day/23
     # print(cups_dict)
     cups_circle = _generate_cups_circle(cups_dict)
-    cups_circle = perform_moves(cups_circle)
     print(cups_circle)
+    cups_circle = perform_moves(cups_circle)
     cup_1 = cups_circle.get_cup_label(1)
     cup = cup_1.next
     output = []
@@ -129,16 +129,24 @@ def puzzle1_solution(cups_dict):
     return ''.join(output)
 
 
-# def puzzle2_solution(cups_dict):
-#     # https://adventofcode.com/2020/day/23#part2
-#     print(cups_dict)
-#     print(max(cups_dict), len(cups_dict))
-#     cups_dict.fromlist(list(range(max(cups_dict) + 1, 1_000_001)))
-#     print(max(cups_dict), len(cups_dict))
-#     cups_dict = perform_moves(cups_dict, num_moves=int(1e7))
-#     index_of_1 = cups_dict.index(1)
-#     print(index_of_1, cups_dict[index_of_1:index_of_1 + 3])
-#     return cups_dict[index_of_1 + 1] * cups_dict[index_of_1 + 2]
+def puzzle2_solution(cups_dict):
+    # https://adventofcode.com/2020/day/23#part2
+    # print(cups_dict)
+    cups_circle = _generate_cups_circle(cups_dict)
+    print(cups_circle.__repr__())
+    prev_cup = cups_circle.largest_cup
+    for i in range(max(cups_dict.keys()) + 1, int(1e6 + 1)):
+        cup = Cup(value=i, smaller_cup=prev_cup)
+        cups_circle.add(cup)
+        # print(cup, prev_cup)
+        prev_cup = cup
+    print(cups_circle.__repr__())
+    cups_circle = perform_moves(cups_circle, num_moves=int(1e7))
+    cup_1 = cups_circle.get_cup_label(1)
+    cup_2 = cup_1.next
+    cup_3 = cup_2.next
+    print(cup_1, cup_2, cup_3)
+    return cup_2.value * cup_3.value
 
 
 def perform_moves(cups_circle, num_moves=100):
@@ -160,8 +168,6 @@ def perform_moves(cups_circle, num_moves=100):
                 break
             destination_cup = destination_cup.smaller_cup
         cups_circle.insert(destination_cup, picked_cups)
-        if i % 10_000 == 0:
-            print("That's 10k moves")
     return cups_circle
 
 
