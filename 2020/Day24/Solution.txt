@@ -1,0 +1,5 @@
+[('dairy', {'xblchx', 'lvv'}), ('eggs', {'xblchx', 'tr'}), ('nuts', {'tr', 'gzvsg'}), ('peanuts', {'gzvsg'}), ('sesame', {'jlsqx', 'gzvsg'}), ('shellfish', {'gzvsg', 'jlsqx', 'fnntr', 'csqc'}), ('soy', {'jlsqx', 'pmz'}), ('wheat', {'gzvsg', 'csqc'})]
+[('dairy', {'lvv'}), ('eggs', {'xblchx'}), ('nuts', {'tr'}), ('peanuts', {'gzvsg'}), ('sesame', {'jlsqx'}), ('shellfish', {'fnntr'}), ('soy', {'pmz'}), ('wheat', {'csqc'})]
+Time taken by in processing food data = 0.0034756999999999982
+Puzzle 1 solution: 2176
+Puzzle 2 solution: lvv,xblchx,tr,gzvsg,jlsqx,fnntr,pmz,csqc
