@@ -6,11 +6,12 @@ from pathlib import Path
 from time import perf_counter
 
 import numpy as np
+import scipy.ndimage
 
 
 class TileColor(Enum):
-    WHITE = 1
-    BLACK = -1
+    WHITE = 0
+    BLACK = 1
 
 
 @dataclass
@@ -34,7 +35,7 @@ NEIGHBOURS = (
     ArrayIndex(-1, -1),
     ArrayIndex(-1, 1)
 )
-WIDTH = 100
+WIDTH = 200
 HEIGHT = 200
 
 
@@ -62,12 +63,7 @@ def _generate_hex_grid(height, width=None):
     # http://roguebasin.roguelikedevelopment.org/index.php?title=Hexagonal_Tiles#Coordinate_systems_with_a_hex_grid
     if width is None:
         width = height
-    grid = np.zeros((height, width), dtype=np.int8)
-    for i in range(height):
-        for j in range(width):
-            if (i + j) % 2 == 0:
-                grid[i, j] = TileColor.WHITE.value
-    return grid
+    return np.zeros((height, width), dtype=np.int8)
 
 
 def puzzle1_solution(file_name, hexagonal_grid):
@@ -81,39 +77,27 @@ def puzzle1_solution(file_name, hexagonal_grid):
         for instruction in directions_reg.findall(line):
             index += movements_dict[instruction]
         # print(index)
-        hexagonal_grid[index.as_tuple] *= -1
+        hexagonal_grid[index.as_tuple] = 1 - hexagonal_grid[index.as_tuple]
         # print(hexagonal_grid[index.as_tuple])
     return hexagonal_grid
 
 
 def puzzle2_solution(hexagonal_grid):
     # https://adventofcode.com/2020/day/24#part2
+    weight_matrix = np.zeros((3, 5))
+    for coords in NEIGHBOURS:
+        weight_matrix[coords.row + 1, coords.column + 2] = 1
+
     for k in range(100):
-        temp = hexagonal_grid.copy()
-        for i, j in np.ndindex(temp.shape):
-            if (i + j) % 2 == 1:
-                continue
-            hexagonal_grid[i, j] = _get_final_tile_colour(
-                temp[i, j], temp[max(0, i-2):min(HEIGHT, i+3), max(0, j-1):min(WIDTH, j+2)]
-            )
+        n_neighbours = scipy.ndimage.convolve(hexagonal_grid, weight_matrix)
+        turn_white_mask = (hexagonal_grid == 1) & (np.logical_or(n_neighbours == 0, n_neighbours > 2))
+        turn_black_mask = (hexagonal_grid == 0) & (n_neighbours == 2)
+        # print(n_neighbours)
+        hexagonal_grid[turn_black_mask] = 1
+        hexagonal_grid[turn_white_mask] = 0
         num_black_tiles = (hexagonal_grid == TileColor.BLACK.value).sum()
         print(f'{num_black_tiles} black tiles after {k+1} days')
     return (hexagonal_grid == TileColor.BLACK.value).sum()
-
-
-def _get_final_tile_colour(tile_colour, immediate_neighbours):
-    # print(np.count_nonzero(immediate_neighbours))
-    num_black_tiles = (immediate_neighbours == TileColor.BLACK.value).sum()
-    if (
-        tile_colour == TileColor.BLACK.value
-        and (num_black_tiles == 1 or num_black_tiles > 3)
-    ):
-        # print(tile_colour, immediate_neighbours)
-        return TileColor.WHITE.value
-    elif tile_colour == TileColor.WHITE.value and num_black_tiles == 2:
-        return TileColor.BLACK.value
-    else:
-        return tile_colour
 
 
 if __name__ == "__main__":
