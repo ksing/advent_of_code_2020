@@ -48,6 +48,32 @@ def _get_seat_changes(seat, adjacent_seats):
         return seat
 
 
+@njit
+def _get_visible_seat_matrix(row, column, all_seats):
+    visible_seats = np.full((3, 3), FLOOR)
+    if all_seats[row, column] == FLOOR:
+        return visible_seats
+    for i, j in np.ndindex(visible_seats.shape):
+        if i == j == 1:
+            continue
+        cntr = 1
+        row_diff = i - 1
+        column_diff = j - 1
+        # print(row_diff, column_diff)
+        while (
+            -1 < row + cntr * row_diff < all_seats.shape[0]
+            and -1 < column + cntr * column_diff < all_seats.shape[1]
+        ):
+            seat_status = all_seats[row + cntr * row_diff, column + cntr * column_diff]
+            # print(row + cntr * row_diff, column + cntr * column_diff, seat_status)
+            if seat_status != FLOOR:
+                visible_seats[i, j] = seat_status
+                break
+            cntr += 1
+    # print(visible_seats)
+    return visible_seats
+
+
 def puzzle1_solution(seat_arrangement):
     # https://adventofcode.com/2020/day/11
     # This is kind of Conway's game of life
@@ -87,32 +113,6 @@ def puzzle2_solution(seat_arrangement):
             print(seat_arrangement)
             break
     return _get_num_occupied_adjacent_seats(seat_arrangement)
-
-
-@njit
-def _get_visible_seat_matrix(row, column, all_seats):
-    visible_seats = np.full((3, 3), FLOOR)
-    if all_seats[row, column] == FLOOR:
-        return visible_seats
-    for i, j in np.ndindex(visible_seats.shape):
-        if i == j == 1:
-            continue
-        cntr = 1
-        row_diff = i - 1
-        column_diff = j - 1
-        # print(row_diff, column_diff)
-        while (
-            -1 < row + cntr * row_diff < all_seats.shape[0]
-            and -1 < column + cntr * column_diff < all_seats.shape[1]
-        ):
-            seat_status = all_seats[row + cntr * row_diff, column + cntr * column_diff]
-            # print(row + cntr * row_diff, column + cntr * column_diff, seat_status)
-            if seat_status != FLOOR:
-                visible_seats[i, j] = seat_status
-                break
-            cntr += 1
-    # print(visible_seats)
-    return visible_seats
 
 
 if __name__ == "__main__":
