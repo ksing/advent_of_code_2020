@@ -1,20 +1,19 @@
 import re
-import sys
 from functools import lru_cache
-from pathlib import Path
-from time import perf_counter
+
+from ..helper_functions import get_input_file_name, timer
 
 RULE_REG = re.compile(r'(\d+): (.+)')
 
 
-def main(file_name):
+def main():
+    file_name = get_input_file_name(__file__)
     with open(file_name, 'r') as f:
         rules, messages = f.read().split('\n\n')
-    t0 = perf_counter()
     print(f'Puzzle 1 solution: {puzzle1_solution(rules, messages)}')
-    print(f'Time taken by puzzle1 = {perf_counter() - t0}')
 
 
+@timer
 def puzzle1_solution(rules, messages):
     # https://adventofcode.com/2020/day/19
     rules_dict = dict(
@@ -72,8 +71,4 @@ def _rules_to_regexes2(rules_dict, key):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        file_name = sys.argv[1]
-    else:
-        file_name = Path(__file__).parent.resolve() / 'input.txt'
-    main(file_name)
+    main()

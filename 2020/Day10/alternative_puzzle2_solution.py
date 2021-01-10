@@ -22,6 +22,7 @@ def _get_device_joltage(input_data):
     return max(input_data) + 3
 
 
+@timer
 def puzzle2_solution(input_data):
     # https://adventofcode.com/2020/day/10#part2
     # Only works with small lists :(

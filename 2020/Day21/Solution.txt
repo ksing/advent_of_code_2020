@@ -1,5 +1,6 @@
-[('dairy', {'xblchx', 'lvv'}), ('eggs', {'xblchx', 'tr'}), ('nuts', {'tr', 'gzvsg'}), ('peanuts', {'gzvsg'}), ('sesame', {'jlsqx', 'gzvsg'}), ('shellfish', {'gzvsg', 'jlsqx', 'fnntr', 'csqc'}), ('soy', {'jlsqx', 'pmz'}), ('wheat', {'gzvsg', 'csqc'})]
+[('dairy', {'lvv', 'xblchx'}), ('eggs', {'tr', 'xblchx'}), ('nuts', {'tr', 'gzvsg'}), ('peanuts', {'gzvsg'}), ('sesame', {'jlsqx', 'gzvsg'}), ('shellfish', {'jlsqx', 'csqc', 'gzvsg', 'fnntr'}), ('soy', {'jlsqx', 'pmz'}), ('wheat', {'csqc', 'gzvsg'})]
 [('dairy', {'lvv'}), ('eggs', {'xblchx'}), ('nuts', {'tr'}), ('peanuts', {'gzvsg'}), ('sesame', {'jlsqx'}), ('shellfish', {'fnntr'}), ('soy', {'pmz'}), ('wheat', {'csqc'})]
-Time taken by in processing food data = 0.0034756999999999982
+Time taken by puzzle1_solution = 5.5099837481975555e-05
 Puzzle 1 solution: 2176
+Time taken by puzzle2_solution = 9.993091225624084e-06
 Puzzle 2 solution: lvv,xblchx,tr,gzvsg,jlsqx,fnntr,pmz,csqc

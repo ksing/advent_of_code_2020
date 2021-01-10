@@ -1,14 +1,15 @@
 import operator as op
-import sys
 from functools import reduce
-from pathlib import Path
 
 import numpy as np
+
+from ..helper_functions import get_input_file_name, timer
 
 START = (0, 0)
 
 
-def main(file_name):
+def main():
+    file_name = get_input_file_name(__file__)
     with open(file_name, 'r') as f:
         input_data = np.array(
             [
@@ -21,10 +22,12 @@ def main(file_name):
     print(f'Puzzle 2 solution: {puzzle2_solution(input_data)}')
 
 
+@timer
 def puzzle1_solution(input_data):
     return get_number_trees_encountered(input_data, (1, 3))
 
 
+@timer
 def puzzle2_solution(input_data):
     steps = (
         (1, 1),
@@ -50,9 +53,4 @@ def get_number_trees_encountered(data, step):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        file_name = sys.argv[1]
-    else:
-        file_name = Path(__file__).parent.resolve() / 'input.txt'
-    main(file_name)
-
+    main()

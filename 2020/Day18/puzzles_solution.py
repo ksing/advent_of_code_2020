@@ -1,20 +1,16 @@
 import re
-import sys
-from pathlib import Path
-from time import perf_counter
+
+from ..helper_functions import get_input_file_name, timer
 
 EXPRESSION_REG = re.compile(r'\([^\(\)]+\)')
 PARANTHESIS_REG = re.compile(r'[\(\)]')
 ADDITION_REG = re.compile(r'\b\d+ \+ \d+\b')
 
 
-def main(file_name):
-    t0 = perf_counter()
+def main():
+    file_name = get_input_file_name(__file__)
     print(f'Puzzle 1 solution: {puzzle1_solution(file_name)}')
-    print(f'Time taken by puzzle1 = {perf_counter() - t0}')
-    t0 = perf_counter()
     print(f'Puzzle 2 solution: {puzzle2_solution(file_name)}')
-    print(f'Time taken by puzzle2 = {perf_counter() - t0}')
 
 
 def get_expression_result(line, evaluation_func):
@@ -36,6 +32,7 @@ def _evaluate_expression_left_to_right(expr):
     return _evaluate_expression_left_to_right(new_expr)
 
 
+@timer
 def puzzle1_solution(file_name):
     # https://adventofcode.com/2020/day/18
     return sum(
@@ -51,6 +48,7 @@ def _evaluate_expression_add_first(expr):
     return _evaluate_expression_left_to_right(expr)
 
 
+@timer
 def puzzle2_solution(file_name):
     # https://adventofcode.com/2020/day/18#part2
     return sum(
@@ -65,8 +63,4 @@ def read_file(file_name):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        file_name = sys.argv[1]
-    else:
-        file_name = Path(__file__).parent.resolve() / 'input.txt'
-    main(file_name)
+    main()

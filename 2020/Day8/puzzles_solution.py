@@ -1,6 +1,7 @@
 import re
-import sys
 from typing import NamedTuple
+
+from ..helper_functions import get_input_file_name, timer
 
 
 class AccInstruction(NamedTuple):
@@ -17,13 +18,15 @@ class AccInstruction(NamedTuple):
 INSTRUCTION_REGEX = re.compile(r'(?P<instruction>acc|nop|jmp) (?P<value>[+-]\d+)$')
 
 
-def main(file_name):
+def main():
+    file_name = get_input_file_name(__file__)
     with open(file_name, 'r') as f:
         input_data = [line.strip() for line in f]
     print(f'Puzzle 1 solution: {puzzle1_solution(input_data)}')
     print(f'Puzzle 2 solution: {puzzle2_solution(input_data)}')
 
 
+@timer
 def puzzle1_solution(input_data):
     acc_code_line = AccInstruction()
     seen = set()
@@ -39,6 +42,7 @@ def puzzle1_solution(input_data):
     return acc_code_line.acc_value
 
 
+@timer
 def puzzle2_solution(input_data):
     acc_code_line = AccInstruction()
     seen = set()
@@ -82,8 +86,4 @@ def _parse_instruction(instruction):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        file_name = sys.argv[1]
-    else:
-        file_name = './input.txt'
-    main(file_name)
+    main()

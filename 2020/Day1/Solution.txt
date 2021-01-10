@@ -1,0 +1,4 @@
+Time taken by _get_puzzle_solution = 0.002039428800344467
+Puzzle 1 solution: 1019571
+Time taken by _get_puzzle_solution = 0.2228802270255983
+Puzzle 2 solution: 100655544

@@ -1,19 +1,20 @@
 import re
-import sys
-from pathlib import Path
 
+from ..helper_functions import get_input_file_name, timer
 from .classes import ShipNavigation, WayPoint
 
 NAVIGATION_REG = re.compile(r'([NSEWLRF])(\d+)')
 
 
-def main(file_name):
+def main():
+    file_name = get_input_file_name(__file__)
     with open(file_name, 'r') as f:
         input_data = [line.strip() for line in f]
     print(f'Puzzle 1 solution: {puzzle1_solution(input_data)}')
     print(f'Puzzle 2 solution: {puzzle2_solution(input_data)}')
 
 
+@timer
 def puzzle1_solution(navigation_instructions):
     # https://adventofcode.com/2020/day/12
     ship = ShipNavigation(facing_direction='E')
@@ -29,6 +30,7 @@ def puzzle1_solution(navigation_instructions):
     return ship.manhattan_distance
 
 
+@timer
 def puzzle2_solution(navigation_instructions):
     # https://adventofcode.com/2020/day/12#part2
     relative_way_point = WayPoint(position_x=10, position_y=1)
@@ -47,8 +49,4 @@ def puzzle2_solution(navigation_instructions):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        file_name = sys.argv[1]
-    else:
-        file_name = Path(__file__).parent.resolve() / 'input.txt'
-    main(file_name)
+    main()

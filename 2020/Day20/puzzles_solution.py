@@ -1,14 +1,14 @@
 import itertools as it
 import operator as op
 import re
-import sys
 from collections import namedtuple
 from dataclasses import dataclass
 from functools import reduce
 from pathlib import Path
-from time import perf_counter
 
 import numpy as np
+
+from ..helper_functions import get_input_file_name, timer
 
 TileSides = namedtuple('TileSides', ['left', 'top', 'right', 'bottom'])
 
@@ -73,23 +73,19 @@ class Tile:
         self.tile_data = self.tile_data[1:-1, 1:-1]
 
 
-def main(file_name):
+def main():
+    file_name = get_input_file_name(__file__)
     with open(file_name, 'r') as f:
         input_data = f.read().strip().split('\n\n')
 
-    t0 = perf_counter()
     image_tiles = match_image_tiles(
         dict(Tile.parse_input(tile_input) for tile_input in input_data)
     )
-    print(f'Time taken in arranging image tiles = {perf_counter() - t0}')
-    t0 = perf_counter()
     print(f'Puzzle 1 solution: {puzzle1_solution(image_tiles)}')
-    print(f'Time taken by puzzle1 = {perf_counter() - t0}')
-    t0 = perf_counter()
     print(f'Puzzle 2 solution: {puzzle2_solution(image_tiles)}')
-    print(f'Time taken by puzzle2 = {perf_counter() - t0}')
 
 
+@timer
 def match_image_tiles(image_tiles):
     # https://adventofcode.com/2020/day/20
     side_list = TileSides._fields
@@ -112,11 +108,13 @@ def match_image_tiles(image_tiles):
     return image_tiles
 
 
+@timer
 def puzzle1_solution(image_tiles):
     corner_tiles = (tile.tile_name for tile in image_tiles.values() if tile.num_tile_matches == 2)
     return reduce(op.mul, corner_tiles)
 
 
+@timer
 def puzzle2_solution(image_tiles):
     # https://adventofcode.com/2020/day/20#part2
     image = _get_joined_image(image_tiles)
@@ -223,8 +221,4 @@ def _read_monster_image():
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        file_name = sys.argv[1]
-    else:
-        file_name = Path(__file__).parent.resolve() / 'input.txt'
-    main(file_name)
+    main()

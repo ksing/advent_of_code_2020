@@ -1,0 +1,2 @@
+Time taken by puzzle1_solution = 55.98089857399464
+Puzzle 1 solution: 1478097

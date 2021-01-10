@@ -1,22 +1,19 @@
 import itertools as it
 import re
-import sys
-from pathlib import Path
-from time import perf_counter
+
+from ..helper_functions import get_input_file_name, timer
 
 MASK_REG = re.compile(r'mask = ([X01]{36})')
 MEMORY_REG = re.compile(r'mem\[(\d+)\] = (\d+)')
 
 
-def main(file_name):
-    t0 = perf_counter()
+def main():
+    file_name = get_input_file_name(__file__)
     print(f'Puzzle 1 solution: {puzzle1_solution(file_name)}')
-    print(f'Time taken by puzzle1 = {perf_counter() - t0}')
-    t0 = perf_counter()
     print(f'Puzzle 2 solution: {puzzle2_solution(file_name)}')
-    print(f'Time taken by puzzle2 = {perf_counter() - t0}')
 
 
+@timer
 def puzzle1_solution(file_name):
     # https://adventofcode.com/2020/day/14
     memory_store = {}
@@ -44,6 +41,7 @@ def _get_bitmasked_value(memory, bitmask):
     return int(''.join(new_memory), 2)
 
 
+@timer
 def puzzle2_solution(file_name):
     # https://adventofcode.com/2020/day/14#part2
     memory_store = {}
@@ -83,8 +81,4 @@ def _get_bitmasked_memory_address(memory, bitmask):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        file_name = sys.argv[1]
-    else:
-        file_name = Path(__file__).parent.resolve() / 'input.txt'
-    main(file_name)
+    main()

@@ -1,0 +1,4 @@
+Time taken by puzzle1_solution = 0.002510769758373499
+Puzzle 1 solution: 189 trees
+Time taken by puzzle2_solution = 0.010989250149577856
+Puzzle 2 solution: 1718180100

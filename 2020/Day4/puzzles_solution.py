@@ -1,8 +1,10 @@
 import re
-import sys
+
+from ..helper_functions import get_input_file_name, timer
 
 
-def main(file_name):
+def main():
+    file_name = get_input_file_name(__file__)
     with open(file_name, 'r') as f:
         passports_list = [
             passport.strip().replace('\n', ' ') for passport in f.read().split('\n\n')
@@ -12,6 +14,7 @@ def main(file_name):
     print(f'Puzzle 2 solution: {puzzle2_solution(passports_list)}')
 
 
+@timer
 def puzzle1_solution(passports_list):
     dict_reg = {
         'Birth Year': re.compile(r'\bbyr:\S'),
@@ -29,6 +32,7 @@ def puzzle1_solution(passports_list):
     )
 
 
+@timer
 def puzzle2_solution(passports_list):
     dict_reg = {
         'Birth Year': re.compile(r'\bbyr:(?:19[2-9][0-9]|200[0-2])\b'),
@@ -47,8 +51,4 @@ def puzzle2_solution(passports_list):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        file_name = sys.argv[1]
-    else:
-        file_name = './input.txt'
-    main(file_name)
+    main()

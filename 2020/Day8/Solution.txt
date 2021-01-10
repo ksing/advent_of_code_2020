@@ -1,0 +1,6 @@
+Infinte loop has begun with AccInstruction(acc_value=2058, jmp_value=269)
+Time taken by puzzle1_solution = 0.0008560349233448505
+Puzzle 1 solution: 2058
+Program terminated correctly by changing line #287.
+Time taken by puzzle2_solution = 0.015137491282075644
+Puzzle 2 solution: 1000

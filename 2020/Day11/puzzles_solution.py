@@ -1,27 +1,22 @@
-import sys
-from pathlib import Path
-from time import perf_counter
-
 import numpy as np
-from numba import njit, int32, int8
+from numba import njit
+
+from ..helper_functions import get_input_file_name, timer
 
 EMPTY_SEAT = 0
 OCCUPIED_SEAT = 1
 FLOOR = 2
 
 
-def main(file_name):
+def main():
+    file_name = get_input_file_name(__file__)
     with open(file_name, 'r') as f:
         input_data = [
             list(line.replace('L', '0').replace('#', '1').replace('.', '2').strip())
             for line in f
         ]
-    t0 = perf_counter()
     print(f'Puzzle 1 solution: {puzzle1_solution(np.array(input_data, dtype=np.int8))}')
-    print(f'Time taken by puzzle1 = {perf_counter() - t0}')
-    t0 = perf_counter()
     print(f'Puzzle 2 solution: {puzzle2_solution(np.array(input_data, dtype=np.int8))}')
-    print(f'Time taken by puzzle2 = {perf_counter() - t0}')
 
 
 @njit
@@ -74,6 +69,7 @@ def _get_visible_seat_matrix(row, column, all_seats):
     return visible_seats
 
 
+@timer
 def puzzle1_solution(seat_arrangement):
     # https://adventofcode.com/2020/day/11
     # This is kind of Conway's game of life
@@ -95,6 +91,7 @@ def puzzle1_solution(seat_arrangement):
     return _get_num_occupied_adjacent_seats(seat_arrangement)
 
 
+@timer
 def puzzle2_solution(seat_arrangement):
     # https://adventofcode.com/2020/day/11#part2
     print(seat_arrangement)
@@ -116,9 +113,4 @@ def puzzle2_solution(seat_arrangement):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        file_name = sys.argv[1]
-    else:
-        file_name = Path(__file__).parent.resolve() / 'input.txt'
-    main(file_name)
-
+    main()

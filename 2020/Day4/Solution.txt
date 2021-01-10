@@ -1,0 +1,5 @@
+Number of passports = 280
+Time taken by puzzle1_solution = 0.003802842926234007
+Puzzle 1 solution: 202
+Time taken by puzzle2_solution = 0.00395808694884181
+Puzzle 2 solution: 137

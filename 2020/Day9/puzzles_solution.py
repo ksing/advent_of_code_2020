@@ -1,10 +1,12 @@
 import itertools as it
-import sys
+
+from ..helper_functions import get_input_file_name, timer
 
 PREAMBLE_SIZE = 25
 
 
-def main(file_name):
+def main():
+    file_name = get_input_file_name(__file__)
     with open(file_name, 'r') as f:
         input_data = [int(line.strip()) for line in f]
     invalid_number = puzzle1_solution(input_data)
@@ -12,6 +14,7 @@ def main(file_name):
     print(f'Puzzle 2 solution: {puzzle2_solution(input_data, invalid_number)}')
 
 
+@timer
 def puzzle1_solution(input_data):
     # https://adventofcode.com/2020/day/9
 
@@ -26,6 +29,7 @@ def puzzle1_solution(input_data):
     print('Not found')
 
 
+@timer
 def puzzle2_solution(input_data, invalid_number):
     # https://adventofcode.com/2020/day/9#part2
     for start_index, start_number in enumerate(input_data):
@@ -41,8 +45,4 @@ def puzzle2_solution(input_data, invalid_number):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        file_name = sys.argv[1]
-    else:
-        file_name = './input.txt'
-    main(file_name)
+    main()

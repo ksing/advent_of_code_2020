@@ -1,6 +1,7 @@
 import re
-import sys
 from collections import defaultdict
+
+from ..helper_functions import get_input_file_name, timer
 
 RULE_REG = re.compile(
     r'(?P<container>(?:\w+ ){1,2})bags? contains?(?P<contained_bags>( \d+(?: \w+){1,2} bags?[,\.])+)'
@@ -8,7 +9,8 @@ RULE_REG = re.compile(
 BAG_REG = re.compile(r'(?P<number>\d+)(?P<color>(?: \w+){1,2}) bag')
 
 
-def main(file_name):
+def main():
+    file_name = get_input_file_name(__file__)
     with open(file_name, 'r') as f:
         inner_bag_dict, outer_bag_dict = _get_bag_rules(
             [line.replace(' no ', ' 0 ').strip() for line in f]
@@ -17,6 +19,7 @@ def main(file_name):
     print(f'Puzzle 2 solution: {puzzle2_solution(outer_bag_dict, "shiny gold")}')
 
 
+@timer
 def puzzle1_solution(bag_contain_dict, bag_color):
 
     def _get_num_outermost_bag_colors(color):
@@ -32,6 +35,7 @@ def puzzle1_solution(bag_contain_dict, bag_color):
     return len(set_color_bags)
 
 
+@timer
 def puzzle2_solution(bag_contain_dict, bag_color):
 
     def _get_num_inner_bags(color):
@@ -66,8 +70,4 @@ def _get_bag_rules(rules_list):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        file_name = sys.argv[1]
-    else:
-        file_name = './input.txt'
-    main(file_name)
+    main()

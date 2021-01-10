@@ -1,8 +1,9 @@
 import sys
 from collections import OrderedDict
 from dataclasses import dataclass, field
-from time import perf_counter
 from typing import List, Optional
+
+from ..helper_functions import timer
 
 
 @dataclass
@@ -98,12 +99,8 @@ class CupsCircle:
 
 def main(cup_string):
     cups_dict = OrderedDict((int(cup), Cup(int(cup))) for cup in cup_string)
-    t0 = perf_counter()
     print(f'Puzzle 1 solution: {puzzle1_solution(cups_dict)}')
-    print(f'Time taken by puzzle1 = {perf_counter() - t0}')
-    t0 = perf_counter()
     print(f'Puzzle 2 solution: {puzzle2_solution(cups_dict)}')
-    print(f'Time taken by puzzle1 = {perf_counter() - t0}')
 
 
 def _generate_cups_circle(cups_dict):
@@ -114,6 +111,7 @@ def _generate_cups_circle(cups_dict):
     return cups_circle
 
 
+@timer
 def puzzle1_solution(cups_dict):
     # https://adventofcode.com/2020/day/23
     # print(cups_dict)
@@ -129,6 +127,7 @@ def puzzle1_solution(cups_dict):
     return ''.join(output)
 
 
+@timer
 def puzzle2_solution(cups_dict):
     # https://adventofcode.com/2020/day/23#part2
     # print(cups_dict)
@@ -172,8 +171,8 @@ def perform_moves(cups_circle, num_moves=100):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
+    if len(sys.argv[1]) > 2:
         cup_string = sys.argv[1]
     else:
-        sys.exit('No input provide')
+        sys.exit('No input provided')
     main(cup_string)

@@ -1,22 +1,18 @@
 import re
-import sys
 from collections import deque
 from copy import deepcopy
-from pathlib import Path
-from time import perf_counter
+
+from ..helper_functions import get_input_file_name, timer
 
 
-def main(file_name):
+def main():
+    file_name = get_input_file_name(__file__)
     with open(file_name, 'r') as f:
         dict_players = dict(
             parse_player_decks(player_data) for player_data in f.read().strip().split('\n\n')
         )
-    t0 = perf_counter()
     print(f'Puzzle 1 solution: {puzzle1_solution(deepcopy(dict_players))}')
-    print(f'Time taken by puzzle1 = {perf_counter() - t0}')
-    t0 = perf_counter()
-    print(f'Puzzle 2 solution: {puzzle2_solution(deepcopy(dict_players))}')
-    print(f'Time taken by puzzle2 = {perf_counter() - t0}')
+    #print(f'Puzzle 2 solution: {puzzle2_solution(deepcopy(dict_players))}')
 
 
 def parse_player_decks(player_data):
@@ -26,6 +22,7 @@ def parse_player_decks(player_data):
     return player_number, data
 
 
+@timer
 def puzzle1_solution(dict_players):
     # https://adventofcode.com/2020/day/22
     winning_deck = _play_combat_game(dict_players)
@@ -43,6 +40,7 @@ def _play_combat_game(dict_players):
     return dict_players[1] + dict_players[2]
 
 
+@timer
 def puzzle2_solution(dict_players):
     # https://adventofcode.com/2020/day/22#part2
     # print(dict_players)
@@ -80,8 +78,4 @@ def _get_deck_score(deck):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        file_name = sys.argv[1]
-    else:
-        file_name = Path(__file__).parent.resolve() / 'input.txt'
-    main(file_name)
+    main()

@@ -1,12 +1,11 @@
 import re
-import sys
 from dataclasses import dataclass
 from enum import Enum
-from pathlib import Path
-from time import perf_counter
 
 import numpy as np
 import scipy.ndimage
+
+from ..helper_functions import get_input_file_name, timer
 
 
 class TileColor(Enum):
@@ -39,17 +38,14 @@ WIDTH = 200
 HEIGHT = 200
 
 
-def main(file_name):
-    t0 = perf_counter()
+def main():
     hexagonal_grid = _generate_hex_grid(HEIGHT, WIDTH)
     # num_tiles = hexagonal_grid.sum()
     # print(num_tiles)
+    file_name = get_input_file_name(__file__)
     hexagonal_grid = puzzle1_solution(file_name, hexagonal_grid)
     print(f'Puzzle 1 solution: {(hexagonal_grid == TileColor.BLACK.value).sum()}')
-    print(f'Time taken by puzzle1 = {perf_counter() - t0}')
-    t0 = perf_counter()
     print(f'Puzzle 2 solution: {puzzle2_solution(hexagonal_grid)}')
-    print(f'Time taken by puzzle2 = {perf_counter() - t0}')
 
 
 def read_file(file_name):
@@ -66,6 +62,7 @@ def _generate_hex_grid(height, width=None):
     return np.zeros((height, width), dtype=np.int8)
 
 
+@timer
 def puzzle1_solution(file_name, hexagonal_grid):
     # https://adventofcode.com/2020/day/24
     directions = 'e|se|sw|w|nw|ne'
@@ -82,6 +79,7 @@ def puzzle1_solution(file_name, hexagonal_grid):
     return hexagonal_grid
 
 
+@timer
 def puzzle2_solution(hexagonal_grid):
     # https://adventofcode.com/2020/day/24#part2
     weight_matrix = np.zeros((3, 5))
@@ -101,8 +99,4 @@ def puzzle2_solution(hexagonal_grid):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        file_name = sys.argv[1]
-    else:
-        file_name = Path(__file__).parent.resolve() / 'input.txt'  # type: ignore
-    main(file_name)
+    main()

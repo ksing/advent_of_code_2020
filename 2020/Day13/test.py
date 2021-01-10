@@ -2,7 +2,6 @@ import itertools as it
 
 import numpy as np
 
-
 with open('./input.txt', 'r') as f:
     earliest_timestamp, bus_ids, *_ = [line.strip() for line in f]
 

@@ -1,6 +1,5 @@
-from typing import Callable, ClassVar, Dict
-
 from dataclasses import dataclass
+from typing import Callable, ClassVar, Dict
 
 import numpy as np
 

@@ -1,22 +1,18 @@
-import sys
-from pathlib import Path
-from time import perf_counter
+from ..helper_functions import get_input_file_name, timer
 
 DIVISOR = 20201227
 
 
-def main(file_name):
+def main():
+    file_name = get_input_file_name(__file__)
     card_public_key, door_public_key = [
         int(key) for key in file_name.read_text().strip().splitlines()
     ]
-    t0 = perf_counter()
     print(f"Puzzle 1 solution: {puzzle1_solution(card_public_key, door_public_key)}")
-    print(f'Time taken by puzzle1 = {perf_counter() - t0}')
-    # t0 = perf_counter()
     # print(f'Puzzle 2 solution: {puzzle2_solution(input_data)}')
-    # print(f'Time taken by puzzle2 = {perf_counter() - t0}')
 
 
+@timer
 def puzzle1_solution(card_public_key, door_public_key):
     # https://adventofcode.com/2020/day/25
     subject_number = 7
@@ -36,14 +32,11 @@ def puzzle1_solution(card_public_key, door_public_key):
         return None
 
 
+@timer
 def puzzle2_solution(input_data):
     # https://adventofcode.com/2020/day/25#part2
     return
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        file_name = Path(sys.argv[1]).resolve()
-    else:
-        file_name = Path(__file__).parent.resolve() / 'input.txt'  # type: ignore
-    main(file_name)
+    main()

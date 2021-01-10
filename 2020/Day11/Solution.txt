@@ -51,8 +51,8 @@ Equilibrium reached after 111 passes. Final seat plan:
  [1 1 0 ... 1 0 1]
  [0 0 0 ... 0 0 0]
  [2 1 0 ... 1 0 1]]
+Time taken by puzzle1_solution = 4.105608879122883
 Puzzle 1 solution: 2438
-Time taken by puzzle1 = 3.977692450862378
 [[0 0 0 ... 0 0 0]
  [0 0 0 ... 0 0 0]
  [0 0 0 ... 0 0 0]
@@ -68,6 +68,5 @@ Equilibrium reached after 88 passes. Final seat plan:
  [0 0 1 ... 1 0 1]
  [1 0 0 ... 0 0 0]
  [2 1 0 ... 1 0 1]]
+Time taken by puzzle2_solution = 3.398887960240245
 Puzzle 2 solution: 2174
-Time taken by puzzle2 = 3.2950356360524893
-

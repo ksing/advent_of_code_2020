@@ -1,16 +1,16 @@
 import operator as op
 import re
-import sys
 from collections import defaultdict
 from functools import reduce
 from itertools import chain
-from pathlib import Path
-from time import perf_counter
+
+from ..helper_functions import get_input_file_name, timer
 
 DEFINITION_REG = re.compile(r'([a-z ]+): ([\d+-]+) (?:or ([\d+-]+))')
 
 
-def main(file_name):
+def main():
+    file_name = get_input_file_name(__file__)
     with open(file_name, 'r') as f:
         definitions, my_ticket, other_tickets = f.read().split('\n\n')
 
@@ -22,14 +22,11 @@ def main(file_name):
     ]
     dict_definitions = _get_valid_definitions(definitions)
 
-    t0 = perf_counter()
     print(f'Puzzle 1 solution: {puzzle1_solution(dict_definitions, other_tickets)}')
-    print(f'Time taken by puzzle1 = {perf_counter() - t0}')
-    t0 = perf_counter()
     print(f'Puzzle 2 solution: {puzzle2_solution(dict_definitions, my_ticket, other_tickets)}')
-    print(f'Time taken by puzzle2 = {perf_counter() - t0}')
 
 
+@timer
 def puzzle1_solution(dict_definitions, other_tickets):
     # https://adventofcode.com/2020/day/16
     valid_numbers = set(chain.from_iterable(dict_definitions.values()))
@@ -39,6 +36,7 @@ def puzzle1_solution(dict_definitions, other_tickets):
     )
 
 
+@timer
 def puzzle2_solution(dict_definitions, my_ticket, other_tickets):
     # https://adventofcode.com/2020/day/16#part2
     valid_numbers = set(chain.from_iterable(dict_definitions.values()))
@@ -94,8 +92,4 @@ def _get_definition_index_combinations(definition_indices):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        file_name = sys.argv[1]
-    else:
-        file_name = Path(__file__).parent.resolve() / 'input.txt'
-    main(file_name)
+    main()

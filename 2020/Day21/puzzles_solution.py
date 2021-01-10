@@ -1,17 +1,15 @@
 import re
-import sys
 from collections import Counter
 from itertools import chain
-from pathlib import Path
-from time import perf_counter
+
+from ..helper_functions import get_input_file_name, timer
 
 ALLERGEN_REG = re.compile(r'contains ([a-z]+\s)+(?:\(|$)')
 
 
-def main(file_name):
-    t0 = perf_counter()
+def main():
+    file_name = get_input_file_name(__file__)
     ingredient_counter, allergen_ingredient_dict = _process_allergens_ingredients(file_name)
-    print(f'Time taken by in processing food data = {perf_counter() - t0}')
     print(f'Puzzle 1 solution: {puzzle1_solution(ingredient_counter, allergen_ingredient_dict)}')
     print(f'Puzzle 2 solution: {puzzle2_solution(allergen_ingredient_dict)}')
 
@@ -62,6 +60,7 @@ def _reduce_allergen_ingredient_dict(allergen_ingredient_dict):
         return _reduce_allergen_ingredient_dict(allergen_ingredient_dict)
 
 
+@timer
 def puzzle1_solution(ingredient_counter, allergen_ingredient_dict):
     # https://adventofcode.com/2020/day/21
     non_allergens = set(ingredient_counter) - set(chain.from_iterable(allergen_ingredient_dict.values()))
@@ -72,6 +71,7 @@ def puzzle1_solution(ingredient_counter, allergen_ingredient_dict):
     )
 
 
+@timer
 def puzzle2_solution(allergen_ingredient_dict):
     return ','.join(list(chain.from_iterable(
         ingredients for allergen, ingredients in sorted(allergen_ingredient_dict.items())
@@ -79,8 +79,4 @@ def puzzle2_solution(allergen_ingredient_dict):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        file_name = sys.argv[1]
-    else:
-        file_name = Path(__file__).parent.resolve() / 'input.txt'  # type: ignore
-    main(file_name)
+    main()

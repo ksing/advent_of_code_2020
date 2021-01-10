@@ -1,18 +1,16 @@
 import sys
-from time import perf_counter
+
+from ..helper_functions import timer
 
 
 def main(starting_numbers):
     input_data = [int(num) for num in starting_numbers.split(',')]
     print(input_data)
-    t0 = perf_counter()
     print(f'Puzzle 1 solution: {puzzle_solution(input_data, 2020)}')
-    print(f'Time taken by puzzle1 = {perf_counter() - t0}')
-    t0 = perf_counter()
     print(f'Puzzle 2 solution: {puzzle_solution(input_data, 30000000)}')
-    print(f'Time taken by puzzle2 = {perf_counter() - t0}')
 
 
+@timer
 def puzzle_solution(input_data, last_index):
     # https://adventofcode.com/2020/day/15
     # https://adventofcode.com/2020/day/15#part2

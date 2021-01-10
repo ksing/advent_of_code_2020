@@ -1,0 +1,2 @@
+Time taken by puzzle1_solution = 0.044811510015279055
+Puzzle 1 solution: 160

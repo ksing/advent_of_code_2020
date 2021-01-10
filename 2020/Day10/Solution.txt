@@ -1,0 +1,5 @@
+Counter({1: 70, 3: 32})
+Time taken by puzzle1_solution = 8.742883801460266e-05
+Puzzle 1 solution: 2240
+Time taken by puzzle2_solution = 0.0005379798822104931
+Puzzle 2 solution: 99214346656768

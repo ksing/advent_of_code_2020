@@ -1,24 +1,20 @@
-import sys
-from pathlib import Path
-from time import perf_counter
-
 import numpy as np
+
+from ..helper_functions import get_input_file_name, timer
 
 INACTIVE = '.'
 ACTIVE = '#'
 
 
-def main(file_name):
+def main():
+    file_name = get_input_file_name(__file__)
     with open(file_name, 'r') as f:
         input_data = [list(line.strip()) for line in f]
-    t0 = perf_counter()
     print(f'Puzzle 1 solution: {puzzle1_solution(np.array(input_data))}')
-    print(f'Time taken by puzzle1 = {perf_counter() - t0}')
-    t0 = perf_counter()
     print(f'Puzzle 2 solution: {puzzle2_solution(np.array(input_data))}')
-    print(f'Time taken by puzzle2 = {perf_counter() - t0}')
 
 
+@timer
 def puzzle1_solution(conway_cubes):
     # https://adventofcode.com/2020/day/17
     # Conway's game of cubes
@@ -39,6 +35,7 @@ def puzzle1_solution(conway_cubes):
     return _get_num_activated_cubes(conway_cubes)
 
 
+@timer
 def puzzle2_solution(conway_cubes):
     # https://adventofcode.com/2020/day/17#part2
     print(conway_cubes)
@@ -87,8 +84,4 @@ def _get_num_activated_cubes(energy_matrix):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        file_name = sys.argv[1]
-    else:
-        file_name = Path(__file__).parent.resolve() / 'input.txt'
-    main(file_name)
+    main()
