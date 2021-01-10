@@ -1,13 +1,15 @@
 import operator as op
+import sys
 from functools import reduce
+from pathlib import Path
 
 import numpy as np
 
 START = (0, 0)
 
 
-def main():
-    with open('input.txt', 'r') as f:
+def main(file_name):
+    with open(file_name, 'r') as f:
         input_data = np.array(
             [
                 list(line.strip().replace('.', '0').replace('#', '1'))  # Replace trees with 1
@@ -47,4 +49,10 @@ def get_number_trees_encountered(data, step):
     )
 
 
-main()
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        file_name = sys.argv[1]
+    else:
+        file_name = Path(__file__).parent.resolve() / 'input.txt'
+    main(file_name)
+
