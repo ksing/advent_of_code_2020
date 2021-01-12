@@ -1,10 +1,8 @@
 326519478
+Time taken by puzzle1_solution = 0.00047660619020462036
 Puzzle 1 solution: 25368479
-Time taken by puzzle1 = 0.0007245000000000029
-
 CupsCircle(current_cup=Cup(value=3, next=2, smaller_cup=2), largest_cup=Cup(value=9, next=4, smaller_cup=8), head=Cup(value=3, next=2, smaller_cup=2), tail=Cup(value=8, next=3, smaller_cup=7))
 CupsCircle(current_cup=Cup(value=3, next=2, smaller_cup=2), largest_cup=Cup(value=1000000, next=3, smaller_cup=999999), head=Cup(value=3, next=2, smaller_cup=2), tail=Cup(value=1000000, next=3, smaller_cup=999999))
-
 Cup(value=1, next=205375, smaller_cup=None) Cup(value=205375, next=216878, smaller_cup=205374) Cup(value=216878, next=688669, smaller_cup=216877)
+Time taken by puzzle2_solution = 45.8639541962184
 Puzzle 2 solution: 44541319250
-Time taken by puzzle1 = 37.5957615

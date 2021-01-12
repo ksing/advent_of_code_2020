@@ -1,2 +1,8 @@
+#Pure Python
 Time taken by puzzle1_solution = 55.98089857399464
 Puzzle 1 solution: 1478097
+
+#Cython
+Time taken by puzzle1_solution = 1.2296920167282224
+Puzzle 1 solution: 1478097
+

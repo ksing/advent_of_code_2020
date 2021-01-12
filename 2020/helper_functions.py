@@ -18,6 +18,6 @@ def timer(func):
 
 def get_input_file_name(file_):
     if len(sys.argv) > 1:
-        return sys.argv[1]
+        return Path(sys.argv[1]).resolve()
     else:
         return Path(file_).parent.resolve() / 'input.txt'
