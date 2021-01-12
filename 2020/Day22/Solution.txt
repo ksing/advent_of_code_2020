@@ -1,3 +1,6 @@
-{1: deque([17, 16, 8, 7, 50, 10, 12, 4, 6, 2, 48, 36, 34, 1, 42, 37, 26, 14, 49, 45, 29, 28, 41, 35, 47, 19, 46, 15, 43, 13, 39, 11, 44, 22, 24, 21, 40, 30, 20, 18, 38, 32, 33, 9, 31, 23, 27, 5, 25, 3]), 2: deque([])}
-Time taken by puzzle1_solution = 0.0005362341180443764
+Time taken by puzzle1_solution = 0.0007255999999999929
 Puzzle 1 solution: 31754
+
+Winner: 0
+Time taken by puzzle2_solution = 9.720196
+Puzzle 2 solution: 35436
