@@ -1,9 +1,11 @@
 #cython: language_level=3
+import cython
 
 
-cdef unsigned long pow_mod(unsigned long base, unsigned long exponent, unsigned long modulo):
+@cython.cfunc
+cdef cython.ulong pow_mod(cython.ulong base, cython.ulong exponent, cython.ulong modulo):
     "Calculate (base ** exponent) % modulo efficiently."
-    cdef unsigned long number = 1
+    cdef cython.ulong number = 1
     while exponent:
         if exponent & 1:
             number = number * base % modulo
@@ -12,10 +14,10 @@ cdef unsigned long pow_mod(unsigned long base, unsigned long exponent, unsigned 
     return number
 
 
-cpdef unsigned long modulo_power(unsigned long card_public_key, unsigned long door_public_key, unsigned long subject_number):
-    cdef unsigned long divisor = 20201227
-    cdef unsigned long i
-    for i in range(10_000_000):
+cpdef cython.ulong modulo_power(cython.ulong card_public_key, cython.ulong door_public_key, cython.ulong subject_number):
+    cdef cython.ulong divisor = 20201227
+    cdef cython.ulong i
+    for i in range(1, 10_000_000):
         if pow_mod(subject_number, i, divisor) == door_public_key:
             return pow_mod(card_public_key, i, divisor)
         if pow_mod(subject_number, i, divisor) == card_public_key:
