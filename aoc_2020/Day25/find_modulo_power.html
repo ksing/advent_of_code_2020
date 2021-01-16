@@ -370,7 +370,7 @@ body.cython { font-family: courier; font-size: 12; }
 <pre class="cython line score-0">&#xA0;<span class="">04</span>: </pre>
 <pre class="cython line score-0">&#xA0;<span class="">05</span>: <span class="nd">@cython</span><span class="o">.</span><span class="n">cfunc</span></pre>
 <pre class="cython line score-2" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">06</span>: <span class="k">cdef</span> <span class="kt">cython</span>.<span class="kt">ulong</span> <span class="nf">pow_mod</span><span class="p">(</span><span class="n">cython</span><span class="o">.</span><span class="n">ulong</span> <span class="n">base</span><span class="p">,</span> <span class="n">cython</span><span class="o">.</span><span class="n">ulong</span> <span class="n">exponent</span><span class="p">,</span> <span class="n">cython</span><span class="o">.</span><span class="n">ulong</span> <span class="n">modulo</span><span class="p">):</span></pre>
-<pre class='cython code score-2 '>static unsigned long __pyx_f_17find_modulo_power_pow_mod(unsigned long __pyx_v_base, unsigned long __pyx_v_exponent, unsigned long __pyx_v_modulo) {
+<pre class='cython code score-2 '>static unsigned long __pyx_f_8aoc_2020_5Day25_17find_modulo_power_pow_mod(unsigned long __pyx_v_base, unsigned long __pyx_v_exponent, unsigned long __pyx_v_modulo) {
   unsigned long __pyx_v_number;
   unsigned long __pyx_r;
   <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
@@ -378,7 +378,7 @@ body.cython { font-family: courier; font-size: 12; }
 /* … */
   /* function exit code */
   __pyx_L1_error:;
-  <span class='pyx_c_api'>__Pyx_WriteUnraisable</span>("find_modulo_power.pow_mod", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  <span class='pyx_c_api'>__Pyx_WriteUnraisable</span>("aoc_2020.Day25.find_modulo_power.pow_mod", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
   __pyx_r = 0;
   __pyx_L0:;
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
@@ -419,8 +419,8 @@ body.cython { font-family: courier; font-size: 12; }
 </pre><pre class="cython line score-0">&#xA0;<span class="">15</span>: </pre>
 <pre class="cython line score-0">&#xA0;<span class="">16</span>: </pre>
 <pre class="cython line score-57" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">17</span>: <span class="k">cpdef</span> <span class="kt">cython</span>.<span class="kt">ulong</span> <span class="nf">modulo_power</span><span class="p">(</span><span class="n">cython</span><span class="o">.</span><span class="n">ulong</span> <span class="n">card_public_key</span><span class="p">,</span> <span class="n">cython</span><span class="o">.</span><span class="n">ulong</span> <span class="n">door_public_key</span><span class="p">,</span> <span class="n">cython</span><span class="o">.</span><span class="n">ulong</span> <span class="n">subject_number</span><span class="p">):</span></pre>
-<pre class='cython code score-57 '>static PyObject *__pyx_pw_17find_modulo_power_1modulo_power(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static unsigned long __pyx_f_17find_modulo_power_modulo_power(unsigned long __pyx_v_card_public_key, unsigned long __pyx_v_door_public_key, unsigned long __pyx_v_subject_number, CYTHON_UNUSED int __pyx_skip_dispatch) {
+<pre class='cython code score-57 '>static PyObject *__pyx_pw_8aoc_2020_5Day25_17find_modulo_power_1modulo_power(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static unsigned long __pyx_f_8aoc_2020_5Day25_17find_modulo_power_modulo_power(unsigned long __pyx_v_card_public_key, unsigned long __pyx_v_door_public_key, unsigned long __pyx_v_subject_number, CYTHON_UNUSED int __pyx_skip_dispatch) {
   unsigned long __pyx_v_divisor;
   unsigned long __pyx_v_i;
   unsigned long __pyx_r;
@@ -434,8 +434,8 @@ static unsigned long __pyx_f_17find_modulo_power_modulo_power(unsigned long __py
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_17find_modulo_power_1modulo_power(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_pw_17find_modulo_power_1modulo_power(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8aoc_2020_5Day25_17find_modulo_power_1modulo_power(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_8aoc_2020_5Day25_17find_modulo_power_1modulo_power(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   unsigned long __pyx_v_card_public_key;
   unsigned long __pyx_v_door_public_key;
   unsigned long __pyx_v_subject_number;
@@ -494,11 +494,11 @@ static PyObject *__pyx_pw_17find_modulo_power_1modulo_power(PyObject *__pyx_self
   __pyx_L5_argtuple_error:;
   <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("modulo_power", 1, 3, 3, <span class='py_macro_api'>PyTuple_GET_SIZE</span>(__pyx_args)); <span class='error_goto'>__PYX_ERR(0, 17, __pyx_L3_error)</span>
   __pyx_L3_error:;
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("find_modulo_power.modulo_power", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("aoc_2020.Day25.find_modulo_power.modulo_power", __pyx_clineno, __pyx_lineno, __pyx_filename);
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_17find_modulo_power_modulo_power(__pyx_self, __pyx_v_card_public_key, __pyx_v_door_public_key, __pyx_v_subject_number);
+  __pyx_r = __pyx_pf_8aoc_2020_5Day25_17find_modulo_power_modulo_power(__pyx_self, __pyx_v_card_public_key, __pyx_v_door_public_key, __pyx_v_subject_number);
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -508,12 +508,12 @@ static PyObject *__pyx_pw_17find_modulo_power_1modulo_power(PyObject *__pyx_self
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_17find_modulo_power_modulo_power(CYTHON_UNUSED PyObject *__pyx_self, unsigned long __pyx_v_card_public_key, unsigned long __pyx_v_door_public_key, unsigned long __pyx_v_subject_number) {
+static PyObject *__pyx_pf_8aoc_2020_5Day25_17find_modulo_power_modulo_power(CYTHON_UNUSED PyObject *__pyx_self, unsigned long __pyx_v_card_public_key, unsigned long __pyx_v_door_public_key, unsigned long __pyx_v_subject_number) {
   PyObject *__pyx_r = NULL;
   <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
   <span class='refnanny'>__Pyx_RefNannySetupContext</span>("modulo_power", 0);
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_r);
-  __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyInt_From_unsigned_long</span>(__pyx_f_17find_modulo_power_modulo_power(__pyx_v_card_public_key, __pyx_v_door_public_key, __pyx_v_subject_number, 0));<span class='error_goto'> if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 17, __pyx_L1_error)</span>
+  __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyInt_From_unsigned_long</span>(__pyx_f_8aoc_2020_5Day25_17find_modulo_power_modulo_power(__pyx_v_card_public_key, __pyx_v_door_public_key, __pyx_v_subject_number, 0));<span class='error_goto'> if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 17, __pyx_L1_error)</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -522,7 +522,7 @@ static PyObject *__pyx_pf_17find_modulo_power_modulo_power(CYTHON_UNUSED PyObjec
   /* function exit code */
   __pyx_L1_error:;
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_1);
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("find_modulo_power.modulo_power", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("aoc_2020.Day25.find_modulo_power.modulo_power", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   <span class='refnanny'>__Pyx_XGIVEREF</span>(__pyx_r);
@@ -536,22 +536,22 @@ static PyObject *__pyx_pf_17find_modulo_power_modulo_power(CYTHON_UNUSED PyObjec
 <pre class='cython code score-0 '>  for (__pyx_t_1 = 1; __pyx_t_1 &lt; 0x989680; __pyx_t_1+=1) {
     __pyx_v_i = __pyx_t_1;
 </pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">21</span>:         <span class="k">if</span> <span class="n">pow_mod</span><span class="p">(</span><span class="n">subject_number</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">divisor</span><span class="p">)</span> <span class="o">==</span> <span class="n">door_public_key</span><span class="p">:</span></pre>
-<pre class='cython code score-0 '>    __pyx_t_2 = ((__pyx_f_17find_modulo_power_pow_mod(__pyx_v_subject_number, __pyx_v_i, __pyx_v_divisor) == __pyx_v_door_public_key) != 0);
+<pre class='cython code score-0 '>    __pyx_t_2 = ((__pyx_f_8aoc_2020_5Day25_17find_modulo_power_pow_mod(__pyx_v_subject_number, __pyx_v_i, __pyx_v_divisor) == __pyx_v_door_public_key) != 0);
     if (__pyx_t_2) {
 /* … */
     }
 </pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">22</span>:             <span class="k">return</span> <span class="n">pow_mod</span><span class="p">(</span><span class="n">card_public_key</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">divisor</span><span class="p">)</span></pre>
-<pre class='cython code score-0 '>      __pyx_r = __pyx_f_17find_modulo_power_pow_mod(__pyx_v_card_public_key, __pyx_v_i, __pyx_v_divisor);
+<pre class='cython code score-0 '>      __pyx_r = __pyx_f_8aoc_2020_5Day25_17find_modulo_power_pow_mod(__pyx_v_card_public_key, __pyx_v_i, __pyx_v_divisor);
       goto __pyx_L0;
 </pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">23</span>:         <span class="k">if</span> <span class="n">pow_mod</span><span class="p">(</span><span class="n">subject_number</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">divisor</span><span class="p">)</span> <span class="o">==</span> <span class="n">card_public_key</span><span class="p">:</span></pre>
-<pre class='cython code score-0 '>    __pyx_t_2 = ((__pyx_f_17find_modulo_power_pow_mod(__pyx_v_subject_number, __pyx_v_i, __pyx_v_divisor) == __pyx_v_card_public_key) != 0);
+<pre class='cython code score-0 '>    __pyx_t_2 = ((__pyx_f_8aoc_2020_5Day25_17find_modulo_power_pow_mod(__pyx_v_subject_number, __pyx_v_i, __pyx_v_divisor) == __pyx_v_card_public_key) != 0);
     if (__pyx_t_2) {
 /* … */
     }
   }
   /*else*/ {
 </pre><pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">24</span>:             <span class="k">return</span> <span class="n">pow_mod</span><span class="p">(</span><span class="n">door_public_key</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">divisor</span><span class="p">)</span></pre>
-<pre class='cython code score-0 '>      __pyx_r = __pyx_f_17find_modulo_power_pow_mod(__pyx_v_door_public_key, __pyx_v_i, __pyx_v_divisor);
+<pre class='cython code score-0 '>      __pyx_r = __pyx_f_8aoc_2020_5Day25_17find_modulo_power_pow_mod(__pyx_v_door_public_key, __pyx_v_i, __pyx_v_divisor);
       goto __pyx_L0;
 </pre><pre class="cython line score-0">&#xA0;<span class="">25</span>:     <span class="k">else</span><span class="p">:</span></pre>
 <pre class="cython line score-0" onclick="(function(s){s.display=s.display==='block'?'none':'block'})(this.nextElementSibling.style)">+<span class="">26</span>:         <span class="k">return</span> <span class="mf">0</span></pre>
